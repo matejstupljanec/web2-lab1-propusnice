@@ -1,9 +1,13 @@
+import "dotenv/config";
 import express from "express";
+import { pool } from "./db.ts";
+import { getPasses } from "./queries/getPasses.ts";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("/", async (req, res) => {
+  const passes = await getPasses();
+  res.json(passes);
 });
 
 const externalUrl = process.env.RENDER_EXTERNAL_URL;
