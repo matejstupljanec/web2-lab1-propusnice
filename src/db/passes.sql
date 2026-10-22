@@ -1,0 +1,7 @@
+CREATE TABLE passes (
+    id UUID PRIMARY KEY DEFAULT uuidv7(),
+    name TEXT NOT NULL,
+    document TEXT NOT NULL,
+    issued_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    status TEXT NOT NULL DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'CANCELLED'))
+);
