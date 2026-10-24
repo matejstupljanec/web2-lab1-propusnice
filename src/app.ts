@@ -1,4 +1,5 @@
 import "dotenv/config";
+import path from "path";
 import express from "express";
 import QRCode from "qrcode";
 import { auth, requiredScopes } from "express-oauth2-jwt-bearer";
@@ -7,6 +8,10 @@ import { getPassById } from "./queries/getPassById.ts";
 import { createPass } from "./queries/createPass.ts";
 
 const app = express();
+
+app.set("views", path.join(import.meta.dirname, "views"));
+app.set("view engine", "pug");
+app.use(express.static(path.join(import.meta.dirname, "public")));
 
 const checkJwt = auth({
   issuerBaseURL: process.env.AUTH_SERVER,
@@ -22,6 +27,10 @@ const hostname = externalUrl ? "0.0.0.0" : "localhost";
 app.get("/", async (req, res) => {
   const passes = await getPasses();
   res.json(passes);
+});
+
+app.get<{ id: string }>("/info/:id", async (req, res) => {
+  res.render("info");
 });
 
 app.get<{ id: string }>(
