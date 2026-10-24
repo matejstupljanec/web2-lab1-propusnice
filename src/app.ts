@@ -7,7 +7,6 @@ import { getPassById } from "./queries/getPassById.ts";
 import { createPass } from "./queries/createPass.ts";
 
 const app = express();
-app.use(express.json());
 
 const checkJwt = auth({
   issuerBaseURL: process.env.AUTH_SERVER,
@@ -44,6 +43,7 @@ app.post(
   "/passes",
   checkJwt,
   requiredScopes("create:passes"),
+  express.json(),
   async (req, res) => {
     const name: unknown = req.body?.name;
     const document: unknown = req.body?.document;
