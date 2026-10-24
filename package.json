@@ -21,9 +21,10 @@
     "uuid": "^14.0.3"
   },
   "scripts": {
-    "build": "npm run clean && tsc && npm run copy-views",
+    "build": "npm run clean && tsc && npm run copy-views && npm run copy-public",
     "clean": "shx rm -rf dist",
     "copy-views": "shx cp -r src/views/ dist",
+    "copy-public": "shx cp -r src/public/ dist",
     "start": "node dist/app.js",
     "dev": "node --watch src/app.ts"
   }
