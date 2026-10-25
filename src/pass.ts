@@ -7,3 +7,8 @@ export type Pass = {
   issuedAt: Date;
   status: Status;
 };
+
+export type PassStats = {
+  total: number;
+  active: number;
+};
