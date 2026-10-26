@@ -22,16 +22,15 @@ html
                             p #{pass.status}
                             p #{pass.name}
                             p #{pass.document}
-                            p #{pass.name}
                             p #{pass.issuedAt.toLocaleString("hr-HR", { timeZone: "Europe/Zagreb" })}
                             if pass.status === "ACTIVE"
-                                button
-                                    a(href=`/admin/passes/${pass.id}`, title="Poništi") Poništi
-                            button
-                                a(href=`/admin/passes/${pass.id}`, title="Obriši") Obriši
+                                button(type="button" onclick=`cancelPass("${pass.id}")`) Poništi
+                            button(type="button" onclick=`deletePass("${pass.id}")`) Obriši
 
 
         else
             button 
                 a(href="/login", title="Login") Login
+
+        script(src="/js/index.js")
 
