@@ -1,36 +1,34 @@
+doctype html
 html     
     head
         link(rel="stylesheet", href="/css/index.css")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Propusnice
     body 
-        div
+        header
             h1 Propusnice
+            if username
+                form(action="/logout", method="post")
+                    button(type="submit") Logout
+            else
+                a.button(href="/login", title="Login") Login
+                
+        div
             p Ukupni broj propusnica: #{stats.total}
             p Broj aktivnih propusnica: #{stats.active}
 
-        if username
-            div
-                p #{username}
-                form(action="/logout", method="post")
-                    input(type="submit", value="Logout")
-            
+        if username            
             ul
                 each pass in passes
                     li
                         div
-                            p #{pass.status}
+                            p(class=pass.status) #{pass.status}
                             p #{pass.name}
                             p #{pass.document}
                             p #{pass.issuedAt.toLocaleString("hr-HR", { timeZone: "Europe/Zagreb" })}
                             if pass.status === "ACTIVE"
                                 button(type="button" onclick=`cancelPass("${pass.id}")`) Poništi
                             button(type="button" onclick=`deletePass("${pass.id}")`) Obriši
-
-
-        else
-            button 
-                a(href="/login", title="Login") Login
 
         script(src="/js/index.js")
 

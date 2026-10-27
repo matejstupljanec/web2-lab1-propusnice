@@ -1,11 +1,13 @@
+doctype html
 html     
     head
-        link(rel="stylesheet", href="/css/index.css")
+        link(rel="stylesheet", href="/css/info.css")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Propusnica
     body 
         h1 Propusnica
-        h3 Status: #{pass.status}
-        p Ime i prezime: #{pass.name}
-        p Dokument: #{pass.document}
-        p Vrijeme izdavanja: #{pass.issuedAt.toLocaleString("hr-HR", { timeZone: "Europe/Zagreb" })}
+        div
+            h3(class=pass.status) Status: #{pass.status}
+            p Ime i prezime: #{pass.name}
+            p Dokument: #{pass.document}
+            p Vrijeme izdavanja: #{pass.issuedAt.toLocaleString("hr-HR", { timeZone: "Europe/Zagreb" })}
